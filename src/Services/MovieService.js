@@ -1,6 +1,6 @@
 import axios from "axios";
 
-var host = "https://mini-project2-sigma.vercel.app/";
+var host = "https://localhost:3000";
 
 const GetMovies = async () => {
   const res = await axios.get(host+"/movies/movies",{ headers: {
@@ -77,4 +77,51 @@ async function AddMovie(newMovie, setMovies, setLength) {
   }
 }
 
-export { GetMovies, DeleteMovie, AddMovie, UpdateMovie };
+export { GetMovies, DeleteMovie, AddMovie, UpdateMovie };import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import movieRouter from "./routes/MovieRoutes.js";
+import userRouter from "./routes/UserRoutes.js";
+import roleRouter from "./routes/RoleRoutes.js";
+
+dotenv.config(); // Load environment variables
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Custom CORS middleware
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    "http://localhost:5173", // Local development
+    "https://mini-project1-two.vercel.app", // Frontend on Vercel
+  ];
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin); // Dynamically set the allowed origin
+  }
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200); // Handle preflight requests
+  }
+  next();
+});
+
+// Routes
+app.use("/movies", movieRouter);
+app.use("/users", userRouter);
+app.use("/roles", roleRouter);
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
