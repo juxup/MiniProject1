@@ -16,7 +16,7 @@ export default function Login() {
     }
 
     try {
-      const res = await axios.get("http://localhost:3000/users/users", {
+      const res = await axios.get("https://mini-project1-two.vercel.app/users/users", {
         withCredentials: true,
       });
 
