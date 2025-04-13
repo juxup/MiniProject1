@@ -74,10 +74,7 @@ export default function Register() {
           {
             headers: {
               "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "https://mini-project1-two.vercel.app",
-              "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             },
-            withCredentials: true,
           }
         );
 

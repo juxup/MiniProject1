@@ -21,11 +21,8 @@ export default function Login() {
         host + "/users/users",
         {
           headers: {
-            "Content-Type": "text/html",
-            "Access-Control-Allow-Origin": host,
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With",
+            "Content-Type": "text/html"
           },
-          withCredentials: true,
         }
 );
 
