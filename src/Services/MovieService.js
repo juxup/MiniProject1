@@ -1,6 +1,6 @@
 import axios from "axios";
 
-var host = "http://localhost:3000";
+var host = "http://mini-project2-sigma.vercel.app";
 
 const GetMovies = async () => {
   const res = await axios.get(host+"/movies/movies",{ headers: {
