@@ -3,12 +3,10 @@ import axios from "axios";
 var host = "https://mini-project2-sigma.vercel.app/";
 
 const GetMovies = async () => {
-  const res = await axios.get(host + "/movies/movies", {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  });
+  const res = await axios.get(host+"/movies/movies",{ headers: {
+    'Content-Type': 'text/html',"Access-Control-Allow-Origin":host,
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With"
+ }}, { withCredentials: true });
   let list = [];
   res.data.rows.map((tmp) => {
     var movie = {
@@ -27,16 +25,11 @@ const GetMovies = async () => {
 };
 async function UpdateMovie(updatedMovie, setMovies, setLength) {
   try {
-    const res = await axios.put(
-      host + "/movies/updatemovie",
-      updatedMovie,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
-    );
+    const json = JSON.stringify(updatedMovie);
+       const res = await axios.post(host+"/movies/updatemovie",json,{ headers: {
+      'Content-Type': 'text/html',"Access-Control-Allow-Origin":host,
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With"
+   }}, { withCredentials: true });
 
     if (res.data.success) {
       const updatedMovies = await GetMovies();
@@ -52,40 +45,23 @@ async function UpdateMovie(updatedMovie, setMovies, setLength) {
   }
 }
 async function DeleteMovie(id, setMovies, setLength) {
-  const res = await axios.delete(`${host}/movies/delmovie?id=${id}`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  });
+  const res = await axios.get(host+"/shop/delbook?id="+id1,{ headers: {
+    'Content-Type': 'text/html',"Access-Control-Allow-Origin":host,
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With"
+ }}, { withCredentials: true });
   if (res.data.ans === 1) {
     const updatedMovies = await GetMovies();
     setMovies(updatedMovies);
     setLength(updatedMovies.length);
   }
 }
-
-async function GetMovieById(id) {
-  const res = await axios.get(host + "/movies/movies", {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  });
-  return res.data.rows[0];
-}
 async function AddMovie(newMovie, setMovies, setLength) {
   try {
-    const res = await axios.post(
-      `${host}/movies/addmovie`,
-      newMovie,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
-    );
+    const json = JSON.stringify(newMovie);
+   const res = await axios.post(host+"/movies/addmovie",json,{ headers: {
+  'Content-Type': 'text/html',"Access-Control-Allow-Origin":host,
+  "Access-Control-Allow-Headers": "Origin, X-Requested-With"
+}}, { withCredentials: true });
 
     if (res.data.success) {
       const updatedMovies = await GetMovies();
@@ -101,4 +77,4 @@ async function AddMovie(newMovie, setMovies, setLength) {
   }
 }
 
-export { GetMovies, DeleteMovie, GetMovieById, AddMovie, UpdateMovie };
+export { GetMovies, DeleteMovie, AddMovie, UpdateMovie };
