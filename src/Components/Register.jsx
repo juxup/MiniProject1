@@ -67,9 +67,16 @@ export default function Register() {
 
     if (validateForm()) {
       try {
-        const res = await axios.post("http://localhost:3000/users/adduser", formData, {
-          headers: { "Content-Type": "application/json" },
-        });
+        const res = await axios.post(
+          "http://localhost:3000/users/adduser",
+          formData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
 
         if (res.data.success) {
           setSuccessMessage("Registration successful!");

@@ -4,7 +4,10 @@ var host = "http://localhost:3000";
 
 const GetMovies = async () => {
   const res = await axios.get(host + "/movies/movies", {
-    withCredentials: true, 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true,
   });
   let list = [];
   res.data.rows.map((tmp) => {
@@ -24,10 +27,16 @@ const GetMovies = async () => {
 };
 async function UpdateMovie(updatedMovie, setMovies, setLength) {
   try {
-    const res = await axios.put(host + "/movies/updatemovie", updatedMovie, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    });
+    const res = await axios.put(
+      host + "/movies/updatemovie",
+      updatedMovie,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
 
     if (res.data.success) {
       const updatedMovies = await GetMovies();
@@ -43,7 +52,10 @@ async function UpdateMovie(updatedMovie, setMovies, setLength) {
   }
 }
 async function DeleteMovie(id, setMovies, setLength) {
-  const res = await axios.get(host + "/movies/delmovie?id=" + id, {
+  const res = await axios.delete(`${host}/movies/delmovie?id=${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
     withCredentials: true,
   });
   if (res.data.ans === 1) {
@@ -54,17 +66,26 @@ async function DeleteMovie(id, setMovies, setLength) {
 }
 
 async function GetMovieById(id) {
-  const res = await axios.get(host + "/movies/getmovie?id=" + id, {
+  const res = await axios.get(host + "/movies/movies", {
+    headers: {
+      'Content-Type': 'application/json',
+    },
     withCredentials: true,
   });
   return res.data.rows[0];
 }
 async function AddMovie(newMovie, setMovies, setLength) {
   try {
-    const res = await axios.post(host + "/movies/addmovie", newMovie, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      `${host}/movies/addmovie`,
+      newMovie,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
 
     if (res.data.success) {
       const updatedMovies = await GetMovies();
