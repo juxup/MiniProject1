@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../App";
-import { GetMovies, DeleteMovie, AddMovie, UpdateMovie } from "../services/MovieService.js";
+import { GetMovies, DeleteMovie, AddMovie, UpdateMovie } from "../Services/MovieService.js";
 
 export default function Movies() {
     const { logStatus } = useContext(DataContext);
