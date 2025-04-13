@@ -9,6 +9,7 @@ export default function Login() {
   );
   const [isAdmin, setIsAdmin] = useState(sessionStorage.getItem("isAdmin") == 1);
 
+  const host = "https://mini-project2-sigma.vercel.app";
   async function check() {
     if (uname.trim() === "" || pwd.trim() === "") {
       alert("Both fields are required");
@@ -16,9 +17,17 @@ export default function Login() {
     }
 
     try {
-      const res = await axios.get("https://mini-project2-sigma.vercel.app/users/users", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        host + "/users/users",
+        {
+          headers: {
+            "Content-Type": "text/html",
+            "Access-Control-Allow-Origin": host,
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With",
+          },
+          withCredentials: true,
+        }
+);
 
       const user = res.data.rows.find(
         (u) => u.username === uname.trim() && u.password === pwd.trim()
