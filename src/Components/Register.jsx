@@ -65,10 +65,11 @@ export default function Register() {
     setSuccessMessage("");
     setErrorMessage("");
 
+  const host = "https://mini-project2-sigma.vercel.app";
     if (validateForm()) {
       try {
         const res = await axios.post(
-          "https://mini-project2-sigma.vercel.app/users/adduser",
+          `${host}/users/adduser`,
           formData,
           {
             headers: {
