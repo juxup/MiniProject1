@@ -68,7 +68,7 @@ export default function Register() {
     if (validateForm()) {
       try {
         const res = await axios.post(
-          "https://mini-project1-two.vercel.app/users/adduser",
+          "https://mini-project2-sigma.vercel.app/users/adduser",
           formData,
           {
             headers: {
