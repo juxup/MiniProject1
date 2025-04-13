@@ -1,9 +1,0 @@
-{
-  "items": [
-    { "id": 1, "name": "Inception", "details": "A thief who enters the dreams of others to steal secrets is given a task to plant an idea instead." },
-    { "id": 2, "name": "The Matrix", "details": "A hacker discovers the true nature of reality and his role in the war against its controllers." },
-    { "id": 3, "name": "Interstellar", "details": "A group of explorers travel through a wormhole in space to ensure humanity's survival." },
-    { "id": 4, "name": "The Dark Knight", "details": "Batman battles the Joker, who seeks to create chaos in Gotham City." },
-    { "id": 5, "name": "Oppenheimer", "details": "The story of Robert J. Oppenheimer, the creator of the atom bomb." }
-  ]
-}
